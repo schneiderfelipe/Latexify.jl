@@ -115,20 +115,20 @@ outputs:
 ![positiveFeedback](/assets/ode_positive_feedback.png)
 
 
-[DiffEqBiological.jl](https://github.com/JuliaDiffEq/DiffEqBiological.jl)
+[Catalyst.jl](https://github.com/SciML/Catalyst.jl)
 provides another cool domain-specific language which allows you to generate
 equations using a chemical arrow notation.
 
 
 ```julia
-using DiffEqBiological
+using Catalyst
 using Latexify
 
-rn = @reaction_network demoNetwork begin
+rn = @reaction_network begin
   (r_bind, r_unbind), A + B ↔ C
-  Hill(C, v, k, n), 0 --> X
+  hill(C, v, k, n), 0 --> X
   d_x, X --> 0
-end r_bind r_unbind v k n d_x
+end
 
 latexify(rn)
 ```
