@@ -311,6 +311,9 @@ function operator_name(ex::Expr; kwargs...)
         error("I don't know what this is")
     end
 end
+function operator_name(str::LaTeXString; kwargs...)
+    return str
+end
 
 """
     precedence(op)
