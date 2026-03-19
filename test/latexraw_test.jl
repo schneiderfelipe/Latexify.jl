@@ -41,6 +41,16 @@ raw"$a = \left[
 @test latexify(:(u[1][1]); index = :bracket) == raw"$u\left[1\right]\left[1\right]$"
 @test latexify(:(u[1][1]); index = :subscript) == raw"$\left( u_{1} \right)_{1}$"
 @test latexify(:(u_x[1][1]); index=:subscript, snakecase=true) == raw"$\left( u\_x_{1} \right)_{1}$"
+@test latexify(:([1 2 3][2]); index=:bracket) == replace(raw"""$\left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+\end{array}
+\right]\left[2\right]$""", "\r\n"=>"\n")
+@test latexify(:([1 2 3][2]); index=:subscript) == replace(raw"""$\left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+\end{array}
+\right]_{2}$""", "\r\n"=>"\n")
 
 array_test = [ex, str]
 @test all(latexraw.(array_test) .== desired_output)
